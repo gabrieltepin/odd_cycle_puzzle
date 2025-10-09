@@ -47,7 +47,7 @@ m.optimize()
 # --- Print feasible blood types
 status = m.Status
 if status == GRB.Status.OPTIMAL or status == GRB.Status.SUBOPTIMAL:
-    print("✅ Model is feasible.\n")
+    print("Model is feasible.\n")
     for i in pairs:
         print(f"Pair {i}:")
         for t in types:
