@@ -54,7 +54,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; /* arrows behind boxes */
+  /* z-index: 1; arrows behind boxes */
+  pointer-events: none;
 }
 
 
