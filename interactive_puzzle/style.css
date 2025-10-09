@@ -28,6 +28,19 @@ body {
   padding: 0.5em;
 }
 
+/* Align the "Recipient" and "Donor" labels evenly */
+.pair div {
+  display: flex;
+  justify-content: space-between; /* pushes label and select apart */
+  align-items: center;
+  margin: -2px 0;
+}
+
+.pair div select {
+  width: 60px; /* make all selects the same width */
+  text-align: center;
+}
+
 #pair1 {
   top: 50px;
   left: 320px;
@@ -57,6 +70,7 @@ body {
   /* z-index: 1; arrows behind boxes */
   pointer-events: none;
 }
+
 
 
 select {

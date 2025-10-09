@@ -25,15 +25,17 @@ document.getElementById("check").addEventListener("click", () => {
     document.getElementById(`line${l}`).style.stroke = "#888";
   }
 
-  // Check internal incompatibilities
+  // Ensure internal incompatibility — donors and recipients within the same pair should NOT be compatible
   for (let i = 1; i <= 3; i++) {
     const donor = document.getElementById(`don${i}`).value;
     const rec = document.getElementById(`rec${i}`).value;
-    if (!compatible[donor].includes(rec)) {
+
+    if (compatible[donor].includes(rec)) {
       feasible = false;
-      messages.push(`❌ Pair ${i}: Donor ${donor} incompatible with Recipient ${rec}`);
+      messages.push(`❌ Pair ${i}: Donor ${donor} is compatible with Recipient ${rec}, so they shouldn't be in the exchange.`);
     }
   }
+
 
   // cyclic connections (1→2, 2→3, 3→1)
   const next = {1:2, 2:3, 3:1};
