@@ -50,6 +50,14 @@ body {
   transition: stroke 0.3s ease;
 }
 
+#arrows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1; /* arrows behind boxes */
+}
+
+
 select {
   margin: 4px;
   padding: 2px;
