@@ -1,6 +1,6 @@
 \ Model abo_only_kep_copy
 \ LP format - for model browsing. Use MPS format to capture full model detail.
-\ Signature: 0xf75790d7aec3011b
+\ Signature: 0x88246dc324abc925
 Maximize
  
 Subject To
@@ -10,53 +10,54 @@ Subject To
  one_type_don_2: y[2,O] + y[2,A] + y[2,B] + y[2,AB] = 1
  one_type_rec_3: x[3,O] + x[3,A] + x[3,B] + x[3,AB] = 1
  one_type_don_3: y[3,O] + y[3,A] + y[3,B] + y[3,AB] = 1
- incomp_1_O_A: x[1,A] + y[1,O] <= 1
- incomp_1_O_B: x[1,B] + y[1,O] <= 1
- incomp_1_O_AB: x[1,AB] + y[1,O] <= 1
+ one_type_rec_4: x[4,O] + x[4,A] + x[4,B] + x[4,AB] = 1
+ one_type_don_4: y[4,O] + y[4,A] + y[4,B] + y[4,AB] = 1
+ one_type_rec_5: x[5,O] + x[5,A] + x[5,B] + x[5,AB] = 1
+ one_type_don_5: y[5,O] + y[5,A] + y[5,B] + y[5,AB] = 1
  incomp_1_A_A: x[1,A] + y[1,A] <= 1
- incomp_1_A_AB: x[1,AB] + y[1,A] <= 1
  incomp_1_B_B: x[1,B] + y[1,B] <= 1
- incomp_1_B_AB: x[1,AB] + y[1,B] <= 1
- incomp_1_AB_AB: x[1,AB] + y[1,AB] <= 1
- incomp_2_O_O: x[2,O] + y[2,O] <= 1
- incomp_2_O_A: x[2,A] + y[2,O] <= 1
- incomp_2_O_B: x[2,B] + y[2,O] <= 1
- incomp_2_O_AB: x[2,AB] + y[2,O] <= 1
  incomp_2_A_A: x[2,A] + y[2,A] <= 1
- incomp_2_A_AB: x[2,AB] + y[2,A] <= 1
  incomp_2_B_B: x[2,B] + y[2,B] <= 1
- incomp_2_B_AB: x[2,AB] + y[2,B] <= 1
- incomp_3_O_A: x[3,A] + y[3,O] <= 1
- incomp_3_O_B: x[3,B] + y[3,O] <= 1
- incomp_3_O_AB: x[3,AB] + y[3,O] <= 1
  incomp_3_A_A: x[3,A] + y[3,A] <= 1
- incomp_3_A_AB: x[3,AB] + y[3,A] <= 1
  incomp_3_B_B: x[3,B] + y[3,B] <= 1
- incomp_3_B_AB: x[3,AB] + y[3,B] <= 1
- imp_1_2_A_O: x[2,O] + y[1,A] <= 1
+ incomp_4_A_A: x[4,A] + y[4,A] <= 1
+ incomp_4_B_B: x[4,B] + y[4,B] <= 1
+ incomp_5_A_A: x[5,A] + y[5,A] <= 1
+ incomp_5_B_B: x[5,B] + y[5,B] <= 1
  imp_1_2_A_B: x[2,B] + y[1,A] <= 1
- imp_1_2_B_O: x[2,O] + y[1,B] <= 1
  imp_1_2_B_A: x[2,A] + y[1,B] <= 1
- imp_1_2_AB_O: x[2,O] + y[1,AB] <= 1
- imp_1_2_AB_A: x[2,A] + y[1,AB] <= 1
- imp_1_2_AB_B: x[2,B] + y[1,AB] <= 1
- imp_2_3_A_O: x[3,O] + y[2,A] <= 1
  imp_2_3_A_B: x[3,B] + y[2,A] <= 1
- imp_2_3_B_O: x[3,O] + y[2,B] <= 1
  imp_2_3_B_A: x[3,A] + y[2,B] <= 1
- imp_2_3_AB_O: x[3,O] + y[2,AB] <= 1
- imp_2_3_AB_A: x[3,A] + y[2,AB] <= 1
- imp_2_3_AB_B: x[3,B] + y[2,AB] <= 1
- imp_3_1_A_O: x[1,O] + y[3,A] <= 1
- imp_3_1_A_B: x[1,B] + y[3,A] <= 1
- imp_3_1_B_O: x[1,O] + y[3,B] <= 1
- imp_3_1_B_A: x[1,A] + y[3,B] <= 1
- imp_3_1_AB_O: x[1,O] + y[3,AB] <= 1
- imp_3_1_AB_A: x[1,A] + y[3,AB] <= 1
- imp_3_1_AB_B: x[1,B] + y[3,AB] <= 1
+ imp_3_4_A_B: x[4,B] + y[3,A] <= 1
+ imp_3_4_B_A: x[4,A] + y[3,B] <= 1
+ imp_4_5_A_B: x[5,B] + y[4,A] <= 1
+ imp_4_5_B_A: x[5,A] + y[4,B] <= 1
+ imp_5_1_A_B: x[1,B] + y[5,A] <= 1
+ imp_5_1_B_A: x[1,A] + y[5,B] <= 1
+ fix_y_O_1: y[1,O] = 0
+ fix_y_O_2: y[2,O] = 0
+ fix_y_O_3: y[3,O] = 0
+ fix_y_O_4: y[4,O] = 0
+ fix_y_O_5: y[5,O] = 0
+ fix_x_AB_1: x[1,AB] = 0
+ fix_x_AB_2: x[2,AB] = 0
+ fix_x_AB_3: x[3,AB] = 0
+ fix_x_AB_4: x[4,AB] = 0
+ fix_x_AB_5: x[5,AB] = 0
+ fix_y_AB_1: y[1,AB] = 0
+ fix_y_AB_2: y[2,AB] = 0
+ fix_y_AB_3: y[3,AB] = 0
+ fix_y_AB_4: y[4,AB] = 0
+ fix_y_AB_5: y[5,AB] = 0
+ fix_x_O_1: x[1,O] = 0
+ fix_x_O_2: x[2,O] = 0
+ fix_x_O_3: x[3,O] = 0
+ fix_x_O_4: x[4,O] = 0
+ fix_x_O_5: x[5,O] = 0
 Bounds
 Binaries
  x[1,O] x[1,A] x[1,B] x[1,AB] x[2,O] x[2,A] x[2,B] x[2,AB] x[3,O] x[3,A]
- x[3,B] x[3,AB] y[1,O] y[1,A] y[1,B] y[1,AB] y[2,O] y[2,A] y[2,B] y[2,AB]
- y[3,O] y[3,A] y[3,B] y[3,AB]
+ x[3,B] x[3,AB] x[4,O] x[4,A] x[4,B] x[4,AB] x[5,O] x[5,A] x[5,B] x[5,AB]
+ y[1,O] y[1,A] y[1,B] y[1,AB] y[2,O] y[2,A] y[2,B] y[2,AB] y[3,O] y[3,A]
+ y[3,B] y[3,AB] y[4,O] y[4,A] y[4,B] y[4,AB] y[5,O] y[5,A] y[5,B] y[5,AB]
 End

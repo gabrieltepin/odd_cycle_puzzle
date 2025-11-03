@@ -1,65 +1,100 @@
 import gurobipy as gp
 from gurobipy import GRB
 
-# --- Sets
-pairs = [1, 2, 3]
+# --------------------------------------------------------
+# Sets
+# --------------------------------------------------------
+pairs = range(1,4)  # three donor–recipient pairs in cyclic order
+NUM_PAIRS = len(pairs)
 types = ["O", "A", "B", "AB"]
 
-# --- Model
-m = gp.Model("blood_incompatibility")
+# ABO compatibility: donor_type -> compatible recipient types
+compat = {
+    "O": ["O", "A", "B", "AB"],
+    "A": ["A", "AB"],
+    "B": ["B", "AB"],
+    "AB": ["AB"]
+}
 
-# --- Variables
-x = m.addVars(pairs, types, vtype=GRB.BINARY, name="x")  # recipient blood types
-y = m.addVars(pairs, types, vtype=GRB.BINARY, name="y")  # donor blood types
+# --------------------------------------------------------
+# Model
+# --------------------------------------------------------
+m = gp.Model("abo_only_kep")
 
-# --- Constraints (1a), (1b)
+# Decision variables
+x = m.addVars(pairs, types, vtype=GRB.BINARY, name="x")  # recipient blood type
+y = m.addVars(pairs, types, vtype=GRB.BINARY, name="y")  # donor blood type
+
+# --------------------------------------------------------
+# (1) Assignment constraints — one type per person
+# eqs (assign1)–(assign2)
+# --------------------------------------------------------
 for i in pairs:
     m.addConstr(gp.quicksum(x[i, t] for t in types) == 1, f"one_type_rec_{i}")
     m.addConstr(gp.quicksum(y[i, t] for t in types) == 1, f"one_type_don_{i}")
 
-# --- Constraints (1c)-(1e): incompatibility per pair
+# --------------------------------------------------------
+# (2) Internal incompatibility — donor and recipient in same pair cannot match
+# eqs (conflict1)–(conflict8)
+# --------------------------------------------------------
 for i in pairs:
-    # (1c) Recipient O incompatible with donor A,B,AB    
-    m.addConstr(y[i, "O"]  <= 1 - (x[i, "O"] + x[i, "A"]+ x[i, "B"]+ x[i, "AB"]), f"incomp_O_{i}")
-    # (1d) Recipient A incompatible with donor B,AB
-    m.addConstr(y[i, "A"]  <= 1 - (x[i, "A"] + x[i, "AB"]), f"incomp_A_{i}")
-    # (1e) Recipient B incompatible with donor A,AB
-    m.addConstr(y[i, "B"]  <= 1 - (x[i, "B"] + x[i, "AB"]), f"incomp_B_{i}")
-    # (1f) Recipient AB incompatible with donor AB
-    m.addConstr(y[i, "AB"]  <= 1 - (x[i, "AB"]), f"incomp_AB_{i}")
+    for dt in types:
+        for rt in types:
+            if rt in compat[dt]:  # if compatible → forbid both being 1
+                m.addConstr(y[i, dt] + x[i, rt] <= 1, f"incomp_{i}_{dt}_{rt}")
 
-# --- Constraints (1f)-(1h): implication across consecutive pairs
+# --------------------------------------------------------
+# (3) Cycle implications — donor of pair i must be compatible with recipient of pair j
+# eqs (implied1)–(implied8)
+# --------------------------------------------------------
 for i in pairs:
-    j = 1 + (i % 3)  # consecutive pair in cyclic order (1→2, 2→3, 3→1)
-    # (1g)
-    m.addConstr(y[i, "A"] <= x[j, "A"] + x[j, "AB"], f"imp_A_{i}")
-    # (1h)
-    m.addConstr(y[i, "B"] <= x[j, "B"] + x[j, "AB"], f"imp_B_{i}")
-    # (1i)
-    m.addConstr(y[i, "AB"] <= x[j, "AB"], f"imp_AB_{i}")
+    j = 1 + (i % NUM_PAIRS)  # cyclic next pair: 1→2, 2→3, 3→1
+    for dt in types:
+        for rt in types:
+            if rt not in compat[dt]:
+                m.addConstr(y[i, dt] + x[j, rt] <= 1, f"imp_{i}_{j}_{dt}_{rt}")
 
-# --- Objective (you can later modify for matching preference)
+# --------------------------------------------------------
+# (4) Variable fixings (derived algebraically)
+# --------------------------------------------------------
+
+# (a) Fix y[d_i, O] = 0  ---- paragraph: "Fixing y_{d_i,O} to zero"
+for i in pairs:
+    m.addConstr(y[i, "O"] == 0, f"fix_y_O_{i}")
+
+# (b) Fix x[r_i, AB] = 0  ---- paragraph: "Fixing x_{r_i,AB} to zero"
+for i in pairs:
+    m.addConstr(x[i, "AB"] == 0, f"fix_x_AB_{i}")
+
+# (c) Fix y[d_i, AB] = 0  ---- paragraph: "Fixing y_{d_i,AB} to zero"
+for i in pairs:
+    m.addConstr(y[i, "AB"] == 0, f"fix_y_AB_{i}")
+
+# (d) Fix x[r_i, O] = 0  ---- paragraph: "Fixing x_{r_j,O} to zero"
+for i in pairs:
+    m.addConstr(x[i, "O"] == 0, f"fix_x_O_{i}")
+
+# --------------------------------------------------------
+# (5) Binary domain (already binary)
+# --------------------------------------------------------
+
+# No objective — pure feasibility
 m.setObjective(0, GRB.MAXIMIZE)
-
-# --- Solve
 m.optimize()
 
-# --- Print feasible blood types
+# --------------------------------------------------------
+# Results
+# --------------------------------------------------------
 status = m.Status
-if status == GRB.Status.OPTIMAL or status == GRB.Status.SUBOPTIMAL:
-    print("Model is feasible.\n")
+if status in (GRB.Status.OPTIMAL, GRB.Status.SUBOPTIMAL):
+    print("\n✅ Model is feasible.\n")
     for i in pairs:
-        print(f"Pair {i}:")
-        for t in types:
-            if x[i, t].X > 0.5:
-                print(f"  Recipient type: {t}")
-            if y[i, t].X > 0.5:
-                print(f"  Donor type: {t}")
-        print()
+        rec_type = [t for t in types if x[i, t].X > 0.5][0]
+        don_type = [t for t in types if y[i, t].X > 0.5][0]
+        print(f"Pair {i}: Recipient {rec_type} ← Donor {don_type}")
 elif status == GRB.Status.INFEASIBLE:
-    print("Model is infeasible.\n")
+    print("\n❌ Model is infeasible (no odd-length ABO-only cycle exists).\n")
     m.computeIIS()
     m.write("infeasible_constraints.ilp")
-    print("Infeasibility report written to 'infeasible_constraints.ilp'.")
 else:
-    print(f"⚠️ Solver ended with status code {status}.")
+    print(f"\n⚠️ Solver ended with status code {status}.")
