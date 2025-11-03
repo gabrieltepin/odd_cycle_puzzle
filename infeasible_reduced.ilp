@@ -1,0 +1,27 @@
+\ Model reduced_abo_only_kep_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+\ Signature: 0x1da6a2b9226b49a2
+Maximize
+ 
+Subject To
+ assign_x_2: x[2,A] + x[2,B] = 1
+ assign_y_2: y[2,A] + y[2,B] = 1
+ assign_x_3: x[3,A] + x[3,B] = 1
+ assign_y_3: y[3,A] + y[3,B] = 1
+ incomp3_1: x[1,A] + y[1,A] <= 1
+ incomp4_1: x[1,B] + y[1,B] <= 1
+ incomp1_2: x[2,A] + y[2,A] <= 1
+ incomp4_2: x[2,B] + y[2,B] <= 1
+ incomp3_3: x[3,A] + y[3,A] <= 1
+ incomp4_3: x[3,B] + y[3,B] <= 1
+ imp3_1: x[2,A] - y[1,A] <= 0
+ imp4_1: x[2,B] - y[1,B] <= 0
+ imp1_2: - x[3,A] + y[2,A] <= 0
+ imp3_2: x[3,A] - y[2,A] <= 0
+ imp1_3: - x[1,A] + y[3,A] <= 0
+ imp2_3: - x[1,B] + y[3,B] <= 0
+Bounds
+Binaries
+ x[1,A] x[1,B] x[2,A] x[2,B] x[3,A] x[3,B] y[1,A] y[1,B] y[2,A] y[2,B]
+ y[3,A] y[3,B]
+End
