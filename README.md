@@ -70,6 +70,7 @@ This reasoning demonstrates infeasibility **without needing the solver**—a pow
 
 ## 💻 Repository Contents
 
+```
 odd_cycle_puzzle/
 │
 ├── main_base_formulation.py # Implements the 4-type (A,B,O,AB) base feasibility model
@@ -78,6 +79,7 @@ odd_cycle_puzzle/
 ├── example_notebook.ipynb # Interactive walkthrough and discussion cells
 ├── README.md # This documentation file
 └── requirements.txt # Dependencies (gurobipy, etc.)
+```
 
 ## 🚀 How to Run
 
