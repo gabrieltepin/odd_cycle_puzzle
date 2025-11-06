@@ -70,3 +70,73 @@ This reasoning demonstrates infeasibility **without needing the solver**—a pow
 
 ## 💻 Repository Contents
 
+odd_cycle_puzzle/
+│
+├── main_base_formulation.py # Implements the 4-type (A,B,O,AB) base feasibility model
+├── main_with_fixings.py # Implements algebraic fixings before solving
+├── main_reduced_formulation.py # Implements reduced 2-type (A,B) model
+├── example_notebook.ipynb # Interactive walkthrough and discussion cells
+├── README.md # This documentation file
+└── requirements.txt # Dependencies (gurobipy, etc.)
+
+## 🚀 How to Run
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/gabrieltepin/odd_cycle_puzzle.git
+
+cd odd_cycle_puzzle
+
+pip install -r requirements.txt
+
+python main.py
+```
+
+## Interpretable results
+
+Feasible model: The script prints a blood-type assignment for each donor–recipient pair.
+
+Infeasible model: The script prints
+❌ Model is infeasible (no odd-length ABO-only cycle exists)
+and exports an IIS file infeasible_constraints.ilp.
+
+## Classroom Use
+
+The model solves instantly on a standard laptop.
+
+Students can experiment with:
+
+Changing the number of pairs (pairs = [1, 2, 3, 4, 5, ...])
+
+Pre-fixing donor or recipient types
+
+Comparing constraint counts before and after fixings
+
+Instructors can use the solver output to discuss:
+
+Why infeasibility arises structurally,
+
+How constraint redundancy and fixings mimic presolve behavior, and
+
+The conceptual difference between feasibility and optimality problems.
+
+## Educational Value
+
+This repository provides a ready-to-use activity that:
+
+Bridges medical context and mathematical modeling,
+
+Strengthens students’ reasoning about constraint systems,
+
+Demonstrates modular indexing and binary formulation logic,
+
+Encourages reflection on how simplifying assumptions (like ABO-only) can change what is even possible in a matching problem.
+
+## Citation
+
+If you use this material for teaching or research, please cite:
+
+Gabriel P. Teodoro and Hamidreza Validi
+Odd-Length Exchanges in ABO-Only Kidney Exchange: A Feasibility Puzzle for Undergraduate Operations Research Courses
+(submitted to INFORMS Transactions on Education, 2025).
+
