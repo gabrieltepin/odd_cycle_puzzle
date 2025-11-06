@@ -103,40 +103,28 @@ and exports an IIS file infeasible_constraints.ilp.
 ## Classroom Use
 
 The model solves instantly on a standard laptop.
+Students can experiment with: 
 
-Students can experiment with:
+- changing the number of pairs 
 
-Changing the number of pairs (pairs = [1, 2, 3, 4, 5, ...])
-
-Pre-fixing donor or recipient types
-
-Comparing constraint counts before and after fixings
-
-Instructors can use the solver output to discuss:
-
-Why infeasibility arises structurally,
-
-How constraint redundancy and fixings mimic presolve behavior, and
-
-The conceptual difference between feasibility and optimality problems.
+```python
+pairs = [1, 2, 3, 4, 5, ...]
+```
+- Pre-fixing donor or recipient types
+- Comparing constraint counts before and after fixings
+- Instructors can use the solver output to discuss:
+- Why infeasibility arises structurally,
+- How constraint redundancy and fixings mimic presolve behavior, and
+- The conceptual difference between feasibility and optimality problems.
 
 ## Educational Value
 
 This repository provides a ready-to-use activity that:
 
-Bridges medical context and mathematical modeling,
+- Bridges medical context and mathematical modeling,
+- Strengthens students’ reasoning about constraint systems,
+- Demonstrates modular indexing and binary formulation logic,
+- Encourages reflection on how simplifying assumptions (like ABO-only) can change what is even possible in a matching problem.
 
-Strengthens students’ reasoning about constraint systems,
-
-Demonstrates modular indexing and binary formulation logic,
-
-Encourages reflection on how simplifying assumptions (like ABO-only) can change what is even possible in a matching problem.
-
-## Citation
-
-If you use this material for teaching or research, please cite:
-
-Gabriel P. Teodoro and Hamidreza Validi
-Odd-Length Exchanges in ABO-Only Kidney Exchange: A Feasibility Puzzle for Undergraduate Operations Research Courses
-(submitted to INFORMS Transactions on Education, 2025).
+Submitted to INFORMS Transactions on Education, 2025.
 
