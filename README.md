@@ -83,6 +83,19 @@ odd_cycle_puzzle/
 
 ## 🚀 How to Run
 
+You can explore a **live interactive demo** of the puzzle directly in your browser — no installation required.
+
+🎯 **Try it here:**  
+👉 [**Blood-Type Exchange Dashboard**](https://gabrieltepin.github.io/odd_cycle_puzzle/)  
+
+This GitHub Pages site lets students:
+- Select donor and recipient blood types for each of the three pairs.
+- Visualize the directed cycle structure.
+- Check feasibility instantly based on ABO-only compatibility logic.  
+
+The dashboard runs **fully client-side** (in JavaScript) and mirrors the logic of the Python+Gurobi formulation used in the paper.  
+It provides an accessible, hands-on way for students to test combinations and reason about feasibility before examining the algebraic model.
+
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/gabrieltepin/odd_cycle_puzzle.git

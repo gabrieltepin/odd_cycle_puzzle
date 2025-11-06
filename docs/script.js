@@ -54,10 +54,10 @@ document.getElementById("check").addEventListener("click", () => {
 
   const result = document.getElementById("result");
   if (feasible) {
-    result.innerHTML = "✅ Model is feasible.";
+    result.innerHTML = "✅ Valid solution.";
     result.style.color = "green";
   } else {
-    result.innerHTML = messages.join("<br>") + "<br><strong>❌ Model is infeasible.</strong>";
+    result.innerHTML = messages.join("<br>") + "<br><strong>❌ Invalid solution.</strong>";
     result.style.color = "red";
   }
 });
