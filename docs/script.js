@@ -53,11 +53,24 @@ document.getElementById("check").addEventListener("click", () => {
   }
 
   const result = document.getElementById("result");
+
   if (feasible) {
     result.innerHTML = "✅ Valid solution.";
     result.style.color = "green";
   } else {
-    result.innerHTML = messages.join("<br>") + "<br><strong>❌ Invalid solution.</strong>";
+    result.innerHTML = `
+      ${messages.join("<br>")}
+      <br>
+      <strong>
+        ❌ Invalid solution.
+        Try checking our documented formulation at:
+        <a href="https://github.com/gabrieltepin/odd_cycle_puzzle/blob/master/docs/paper.pdf" 
+          target="_blank" 
+          style="color:#007bff; text-decoration:underline;">
+          View Paper
+        </a>.
+      </strong>`;
     result.style.color = "red";
   }
+
 });
