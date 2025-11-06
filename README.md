@@ -109,11 +109,13 @@ python main.py
 
 ## Interpretable results
 
-Feasible model: The script prints a blood-type assignment for each donor–recipient pair.
+Valid instance: The script prints 
+✅ Valid solution a blood-type assignment for each donor–recipient pair.
 
-Infeasible model: The script prints
-❌ Model is infeasible (no odd-length ABO-only cycle exists)
-and exports an IIS file infeasible_constraints.ilp.
+Invalid instance: The script prints
+❌ Invalid solution (no odd-length ABO-only cycle exists)
+and exports an IIS file infeasible_constraints.ilp. Try to run the 
+👉 [**base formulation model**](https://github.com/gabrieltepin/odd_cycle_puzzle/blob/master/main.py)  
 
 ## Classroom Use
 
