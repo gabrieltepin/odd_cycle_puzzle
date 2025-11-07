@@ -129,19 +129,4 @@ pairs = [1, 2, 3, 4, 5, ...]
 ```
 - Pre-fixing donor or recipient types
 - Comparing constraint counts before and after fixings
-- Instructors can use the solver output to discuss:
-- Why infeasibility arises structurally,
-- How constraint redundancy and fixings mimic presolve behavior, and
-- The conceptual difference between feasibility and optimality problems.
-
-## Educational Value
-
-This repository provides a ready-to-use activity that:
-
-- Bridges medical context and mathematical modeling,
-- Strengthens students’ reasoning about constraint systems,
-- Demonstrates modular indexing and binary formulation logic,
-- Encourages reflection on how simplifying assumptions (like ABO-only) can change what is even possible in a matching problem.
-
-Submitted to INFORMS Transactions on Education, 2025.
-
+- Instru

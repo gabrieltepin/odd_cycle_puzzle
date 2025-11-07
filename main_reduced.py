@@ -75,4 +75,4 @@ elif status == GRB.Status.INFEASIBLE:
     m.computeIIS()
     m.write("infeasible_reduced.ilp")
 else:
-    print(f"\n⚠️ Solver ended with status code {status}.")
+    print(f"\n⚠️ Solver ende

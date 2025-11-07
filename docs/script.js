@@ -64,10 +64,10 @@ document.getElementById("check").addEventListener("click", () => {
       <strong>
         ❌ Invalid solution.
         Try checking our documented formulation at:
-        <a href="https://github.com/gabrieltepin/odd_cycle_puzzle/blob/master/docs/paper.pdf" 
+        <a href="https://github.com/gabrieltepin/odd_cycle_puzzle/tree/master" 
           target="_blank" 
           style="color:#007bff; text-decoration:underline;">
-          View Paper
+          Github Repo
         </a>.
       </strong>`;
     result.style.color = "red";
